@@ -1,0 +1,24 @@
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem;
+  border-bottom: 1px solid #000;
+  background-color: #353535;
+}
+
+.header__nav {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+a {
+  color: #ccc;
+  font-weight: bold;
+}
+
+a:hover {
+  font-size: small;
+}
