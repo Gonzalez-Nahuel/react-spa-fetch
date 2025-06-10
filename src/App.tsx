@@ -1,4 +1,3 @@
-import "./App.css";
 import { SpaApp } from "./components/SpaApp";
 
 function App() {
