@@ -1,54 +1,38 @@
-# React + TypeScript + Vite
+# SPA con React, TypeScript y Fetch
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es una **Single Page Application (SPA)** construida desde cero con **React + TypeScript** sin usar React Router, que **navega entre rutas internas y carga contenido HTML dinámico usando `fetch()`**.
 
-Currently, two official plugins are available:
+## Tecnologías usadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React (sin enrutador)
+- TypeScript
+- Vite
+- HTML/CSS
+- Fetch API
 
-## Expanding the ESLint configuration
+## ¿Cómo funciona?
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Utiliza el **estado global `path`** para manejar la ruta actual.
+- Al cambiar de ruta (con clicks o historial del navegador), se hace un `fetch()` al HTML correspondiente ubicado en `/pages/ruta.html`.
+- El contenido cargado se inyecta dinámicamente en el DOM usando `dangerouslySetInnerHTML`.
+- Si ocurre un error (por ejemplo, ruta inválida o fetch fallido), se muestra un mensaje amigable con el componente `ContentError`.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Navegación
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Desde el componente `Header`, los enlaces modifican el `path` y llaman a `window.history.pushState()` para evitar recargar la página. Luego el hook `useSpaApp` detecta el cambio y actualiza el contenido visible.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Instalación y ejecución
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+1. Cloná el repositorio:
+   ```bash
+   git clone https://github.com/Gonzalez-Nahuel/react-spa-fetch
+   cd spa-react-fetch
+   ```
+2. Instalá las dependencias:
+   ```bash
+   npm install
+   ```
+3. Ejecutá la app:
+   ```bash
+   npm run dev
+   ```
